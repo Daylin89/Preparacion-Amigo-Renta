@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Descomprimir la app
+        run: unzip -o -q PreparacionAmigoRenta_GitHub.zip
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -15,8 +17,9 @@ jobs:
         with:
           gradle-version: '8.7'
       - name: Compilar
+        working-directory: HugoAmigoRenta
         run: gradle assembleDebug --no-daemon
       - uses: actions/upload-artifact@v4
         with:
           name: PreparacionAmigoRenta-apk
-          path: app/build/outputs/apk/debug/*.apk
+          path: HugoAmigoRenta/app/build/outputs/apk/debug/*.apk
